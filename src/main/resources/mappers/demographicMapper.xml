@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+CREATE TABLE SV_DEMOGRAOHIC
+(
+	SESSION_ID           VARCHAR2(500) NOT NULL ,
+	GENDER               CHAR(1) NOT NULL ,
+	AGE                  NUMBER NOT NULL ,
+	JOB                  CHAR(1) NOT NULL ,
+	POSIT                VARCHAR2(100) NOT NULL ,
+	CAREER               NUMBER NOT NULL ,
+	MARITAL_STATUS       CHAR(1) NOT NULL ,
+	MAJOR                VARCHAR2(200) NULL ,
+	NAME                 VARCHAR2(50) NULL ,
+	REGDATE              DATE DEFAULT  SYSDATE  NULL ,
+	ID                   VARCHAR2(30) NULL 
+); -->
+
+<mapper namespace="com.mis.mapper.DemographicMapper">
+
+	<!-- 1. 설문 등록 (SV_DEMOGRAOIC 테이블) -->
+	<!-- 테이블 이름 주의!!!  DEMOGRAOIC 임, 중간에 p가 아니고 o임 -->
+   <insert id="insert">
+      INSERT INTO SV_DEMOGRAOHIC
+      	(SESSION_ID, GENDER, AGE, JOB, POSIT
+      	, CAREER, MARITAL_STATUS, MAJOR
+      	, NAME, REGDATE, ID)
+      VALUES
+      	(#{sessionId}, #{gender}, #{age}, #{job}, #{position}
+      	, #{career}, #{marital}, #{major}
+      	, #{name}, SYSDATE, #{id})
+   </insert>
+
+</mapper>

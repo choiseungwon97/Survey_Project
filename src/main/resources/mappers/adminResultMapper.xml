@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mis.mapper.AdminResultMapper">
+
+ <!-- 1. 유저 상세 조회 -->
+ <!-- 테이블 이름 주의!!!  DEMOGRAOIC 임, 중간에 p가 아니고 o임 -->
+  
+   <select id="read" resultType="com.mis.survey.domain.DemographicVO"  >
+      SELECT
+         NAME,
+         POSIT,
+         REGDATE
+      FROM
+         SV_DEMOGRAOHIC
+      WHERE
+         SESSION_ID = #{sessionId}
+   </select>
+
+
+<select id="DemographicList" resultType="com.mis.survey.domain.DemographicVO">
+       SELECT
+      *
+      FROM
+         SV_DEMOGRAOHIC
+      ORDER BY
+      	REGDATE DESC
+    
+   </select>
+
+
+     
+    <!-- 2. 페이징을 위한 (조건에 맞는 or 전체) 게시물 개수 카운트 -->
+  <!--  <select id="countPaging" resultType="int">
+      <![CDATA[
+          SELECT 
+             COUNT(sessionId) 
+          FROM 
+             SV_DEMOGRAOHIC
+         WHERE 
+            SESSION_ID >= 0  
+      ]]>
+   </select> -->
+  
+
+   <!-- 6. 제목 검색 -->
+   <!-- <sql id="search">
+      <if test="searchType != null">
+         <if test="searchType == 'n'.toString()"> and NAME like '%' || #{keyword} || '%' </if>
+        
+      </if>
+   </sql> -->
+
+
+
+   <!-- 3. 검색한 리스트 페이징 -->
+<!--    <select id="listSearch" resultType="com.mis.survey.domain.DemographicVO">
+      <![CDATA[  
+      SELECT * FROM(
+         SELECT ROWNUM RNUM
+         , NAME
+         , POSIT
+         , REGDATE
+         FROM (
+         SELECT 
+            NAME
+         , POSIT
+         , REGDATE
+         FROM SV_DEMOGRAOHIC
+         WHERE SESSION_ID >= 0 
+      ]]>
+      <include refid="search" />
+            ORDER BY SESSION_ID DESC
+      <![CDATA[    
+            )) WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd}) 
+         ORDER BY SESSION_ID DESC
+      ]]>
+   </select> -->
+
+   <!-- 4.유저 검색할 때 전체 카운트 가져오기 -->
+   <!-- <select id="listSearchCount" resultType="int">
+      <![CDATA[  
+        SELECT 
+           COUNT(SESSION_ID) 
+        FROM 
+           SV_DEMOGRAOHIC
+        WHERE 
+           SESSION_ID >= 0 
+      ]]>
+      
+      <include refid="search" />
+   </select>
+    -->
+   
+   
+   
+    <select id="readBigFive" resultType="hashmap">
+   	SELECT 
+   		BQ3+DECODE(BQ8,4,2,2,4,1,5,5,1,BQ8)+BQ13+DECODE(BQ18,4,2,2,4,1,5,5,1,BQ18) AS B1	
+		, BQ2+DECODE(BQ7,4,2,2,4,1,5,5,1,BQ7)+BQ12+DECODE(BQ17,4,2,2,4,1,5,5,1,BQ17) AS B2
+		, BQ4+DECODE(BQ9,4,2,2,4,1,5,5,1,BQ9)+BQ14+DECODE(BQ19,4,2,2,4,1,5,5,1,BQ19) AS B3
+		, BQ5+DECODE(BQ10,4,2,2,4,1,5,5,1,BQ10)+DECODE(BQ15,4,2,2,4,1,5,5,1,BQ15)+DECODE(BQ20,4,2,2,4,1,5,5,1,BQ20) AS B4
+		, BQ1+DECODE(BQ6,4,2,2,4,1,5,5,1,BQ6)+BQ11+DECODE(BQ16,4,2,2,4,1,5,5,1,BQ16) AS B5
+	FROM 
+		SV_BIGFIVE
+	WHERE
+		SESSION_ID = #{sessionId}
+   </select>
+
+
+   <select id="readCareer" resultType="hashmap">
+	SELECT
+		CQ1+CQ2+CQ3 AS C1
+		, CQ4+CQ5+CQ6+CQ7 AS C2
+		, CQ8+CQ9+CQ10+DECODE(CQ11,4,2,2,4,1,5,5,1,CQ11)+DECODE(CQ12,4,2,2,4,1,5,5,1,CQ12) AS C3
+		, CQ13+CQ14+CQ15+CQ16+CQ17 AS C4
+		, CQ18+CQ19+CQ20+CQ21+CQ22+CQ23 AS C5
+		, CQ24+CQ25+CQ26+CQ27+CQ28 AS C6
+		, CQ29+CQ30+CQ31 AS C7
+		, CQ32+CQ33+CQ34 AS C8
+		, CQ35+CQ36+CQ37 AS C9
+		, CQ38+CQ39+CQ40 AS C10
+		, CQ41+CQ42+CQ43 AS C11
+		FROM 
+			SV_CAREER
+		WHERE 
+			SESSION_ID = #{sessionId}
+   </select>
+   
+   
+   <select id="readJob" resultType="hashmap">
+	SELECT
+		JQ1+JQ2+DECODE(JQ3,7,1,6,2,5,3,1,7,2,6,3,5,JQ3) AS J1
+		, JQ4+JQ5+JQ6 AS J2
+		, JQ7+JQ8+JQ9 AS J3
+		, JQ10+JQ11+JQ12 AS J4
+		, JQ13+JQ14+JQ15 AS J5
+		, JQ16+JQ17+DECODE(JQ18,7,1,6,2,5,3,1,7,2,6,3,5,JQ18) AS J6
+		, JQ19+JQ20+DECODE(JQ21,7,1,6,2,5,3,1,7,2,6,3,5,JQ21) AS J7
+		FROM 
+			SV_JOB
+		WHERE 
+			SESSION_ID = #{sessionId}
+   </select>
+   
+   
+   <select id="readDemographic" resultType="com.mis.survey.domain.DemographicVO">
+	SELECT
+	 	SESSION_ID
+	 	, DECODE(GENDER,1,'남자',2,'여자')AS GENDER
+	 	, AGE
+	 	, DECODE(JOB,1,'개발 업무',2,'유지보수 업무',3,'관리 및 사무 업무',4,'예비 개발자') AS JOB
+	 	, CAREER
+	 	, DECODE(MARITAL_STATUS,1,'미혼',2,'기혼 + 자녀 없음',3,'기혼 + 자녀 있음') AS MARITAL
+	 	, MAJOR
+	 	, ID
+	 	, NAME
+	 FROM
+	 	SV_DEMOGRAOHIC
+	 WHERE
+	 	SESSION_ID = #{sessionId}
+   </select>
+   
+  
+   
+   
+   <select id="readJobMPS" resultType="string">
+	SELECT
+		TO_CHAR(ROUND(((JQ1+JQ4+JQ7)/3) * JQ10 * JQ14,2)) AS MPS
+	FROM
+		SV_JOB
+	WHERE
+		SESSION_ID = #{sessionId}
+   </select>
+   
+   
+</mapper>

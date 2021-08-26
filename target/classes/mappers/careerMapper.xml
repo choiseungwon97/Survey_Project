@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mis.mapper.CareerMapper">
+
+	<!-- 1. 설문 등록 (SV_CAREER 테이블) career_q -->
+   <insert id="insert">
+      INSERT INTO SV_CAREER
+      	(SESSION_ID
+      	, CQ1, CQ2, CQ3, CQ4, CQ5, CQ6, CQ7, CQ8, CQ9, CQ10
+     	, CQ11, CQ12, CQ13, CQ14, CQ15, CQ16, CQ17, CQ18, CQ19, CQ20
+      	, CQ21, CQ22, CQ23, CQ24, CQ25, CQ26, CQ27, CQ28, CQ29, CQ30
+      	, CQ31, CQ32, CQ33, CQ34, CQ35, CQ36, CQ37, CQ38, CQ39, CQ40
+      	, CQ41, CQ42, CQ43, REGDATE)
+      VALUES
+      	(#{sessionId}
+      	, #{CQ1}, #{CQ2}, #{CQ3}, #{CQ4}, #{CQ5}, #{CQ6}, #{CQ7}, #{CQ8}, #{CQ9}, #{CQ10}
+      	, #{CQ11}, #{CQ12}, #{CQ13}, #{CQ14}, #{CQ15}, #{CQ16}, #{CQ17}, #{CQ18}, #{CQ19}, #{CQ20}
+      	, #{CQ21}, #{CQ22}, #{CQ23}, #{CQ24}, #{CQ25}, #{CQ26}, #{CQ27}, #{CQ28}, #{CQ29}, #{CQ30}
+      	, #{CQ31}, #{CQ32}, #{CQ33}, #{CQ34}, #{CQ35}, #{CQ36}, #{CQ37}, #{CQ38}, #{CQ39}, #{CQ40}
+      	, #{CQ41}, #{CQ42}, #{CQ43}, SYSDATE)
+   </insert>
+
+	<!-- 2. 설문 수정1 (SV_Career 테이블) career_q2 -->
+   <update id="update1">
+   
+      UPDATE SV_CAREER
+      
+      SET
+        CQ13 = #{CQ13}
+      , CQ14 = #{CQ14}
+      , CQ15 = #{CQ15}
+      , CQ16 = #{CQ16}
+      , CQ17 = #{CQ17}
+      , CQ18 = #{CQ18}
+      , CQ19 = #{CQ19}
+      , CQ20 = #{CQ20}
+      , CQ21 = #{CQ21}
+      , CQ22 = #{CQ22}
+      , CQ23 = #{CQ23}
+      , CQ24 = #{CQ24}
+      , CQ25 = #{CQ25}
+      , CQ26 = #{CQ26}
+      , CQ27 = #{CQ27}
+      , CQ28 = #{CQ28}
+   
+      WHERE SESSION_ID = #{sessionId}
+   
+   </update>
+   
+   <!-- 3. 설문 수정2 (SV_Career 테이블) career_q3 -->
+   <update id="update2">
+   
+      UPDATE SV_CAREER
+      
+      SET
+        CQ29 = #{CQ29}
+      , CQ30 = #{CQ30}
+      , CQ31 = #{CQ31}
+      , CQ32 = #{CQ32}
+      , CQ33 = #{CQ33}
+      , CQ34 = #{CQ34}
+      , CQ35 = #{CQ35}
+      , CQ36 = #{CQ36}
+      , CQ37 = #{CQ37}
+      , CQ38 = #{CQ38}
+      , CQ39 = #{CQ39}
+      , CQ40 = #{CQ40}
+      , CQ41 = #{CQ41}
+      , CQ42 = #{CQ42}
+      , CQ43 = #{CQ43}
+      
+      WHERE SESSION_ID = #{sessionId}
+      
+   </update>
+
+</mapper>

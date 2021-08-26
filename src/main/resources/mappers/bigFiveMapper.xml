@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mis.mapper.BigFiveMapper">
+
+   <!-- 1. 설문 등록 (SV_BIGFIVE 테이블) -->
+   <insert id="insertSV">
+      INSERT INTO SV_BIGFIVE 
+      	( SESSION_ID
+      	, BQ1, BQ2, BQ3, BQ4, BQ5, BQ6, BQ7, BQ8, BQ9, BQ10
+      	, BQ11, BQ12, BQ13, BQ14, BQ15, BQ16, BQ17, BQ18, BQ19, BQ20
+      	, REGDATE
+      	)
+      VALUES
+      	( #{sessionId}
+      	, #{BQ1}, #{BQ2}, #{BQ3}, #{BQ4}, #{BQ5}, #{BQ6}, #{BQ7}, #{BQ8}, #{BQ9}, #{BQ10}
+      	, #{BQ11}, #{BQ12}, #{BQ13}, #{BQ14}, #{BQ15}, #{BQ16}, #{BQ17}, #{BQ18}, #{BQ19}, #{BQ20}
+      	, SYSDATE
+      	)
+   </insert>
+
+   
+</mapper>

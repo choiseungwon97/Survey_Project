@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mis.mapper.HomeMapper">
+
+	<!-- 1. 설문 참여 여부 확인 -->
+   <select id="checkSessionId" resultType="string">
+		SELECT
+			SESSION_ID 
+		FROM
+			SV_DEMOGRAOHIC
+		WHERE 
+			SESSION_ID = #{sessionId}
+   </select>
+
+</mapper>

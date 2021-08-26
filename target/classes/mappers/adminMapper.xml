@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mis.mapper.AdminMapper">
+
+<!-- 0. 기업/슈퍼 관리자 :: 로그인 -->
+<select id="login" resultType="com.mis.survey.domain.AdminVO">
+
+		SELECT 
+			ID
+			,PASSWORD
+			,COMPANY_NAME
+			,EMPLOYEE_NAME
+			,POST_CODE
+			,ADDRESS
+			,TEL
+			,AUTHORITY
+		FROM 
+			ADMIN
+		WHERE 
+			ID = #{id} AND PASSWORD = #{password}
+	</select>
+
+
+<!-- 1. 기업 :: 정보 불러오기 -->
+	<select id="adread" resultType="com.mis.survey.domain.AdminVO"  >
+		SELECT
+			ID
+			,PASSWORD
+			,COMPANY_NAME
+			,EMPLOYEE_NAME
+			,POST_CODE
+			,ADDRESS
+			,TEL
+		FROM
+			ADMIN
+		WHERE
+			ID = #{id}
+	</select>
+
+
+   <!-- 2. 기업 :: 정보 수정 -->
+   <update id="adupdate">
+      UPDATE 
+			ADMIN
+		SET 
+			PASSWORD = #{password}
+			,COMPANY_NAME = #{companyName}
+			,EMPLOYEE_NAME = #{employeeName}
+			,POST_CODE = #{postCode}
+			,ADDRESS = #{address}
+			,TEL = #{tel}
+		WHERE
+			ID = #{id}
+   </update>
+
+	<!-- 3. 기업 :: 가입 -->
+	<insert id="adcreate">
+	
+		INSERT INTO
+			ADMIN
+		(ID, PASSWORD, COMPANY_NAME, EMPLOYEE_NAME, POST_CODE, ADDRESS, TEL)
+		VALUES
+		(#{id}, #{password}, #{companyName} , #{employeeName}, #{postCode}, #{address}, #{tel})
+	</insert>
+	
+	<!-- 3. 기업 :: 가입 -> ID 중복체크 -->
+   	<select id="idcheck" resultType="com.mis.survey.domain.AdminVO"  >
+		SELECT
+			ID
+		FROM
+			ADMIN
+		WHERE
+			ID = #{id}
+	</select>
+	
+</mapper>
